@@ -27,13 +27,26 @@ def get_selected_row(event):
 	index = list_view.curselection()[0]
 	# return(index)
 	selected_turple = list_view.get(index)
+
+	title_entry.delete(0,END)
+	title_entry.insert(END,selected_turple[1])
+ 
+	author_entry.delete(0,END)
+	author_entry.insert(END,selected_turple[2])
+
+	year_entry.delete(0,END)
+	year_entry.insert(END,selected_turple[3])
+
+	isbn_entry.delete(0,END)
+	isbn_entry.insert(END,selected_turple[4])
 	
 
 
 
 def update_command():
-	pass
-
+	#here we just need the selected turple index[0] since it contatins the id of the item we want to update, then we get() the values in the entry boxes to send through to our db
+	book_backend.update(selected_turple[0],title_entry.get(),author_entry.get(),year_entry.get(),isbn_entry.get())
+	print(selected_turple[0],title_entry.get(),author_entry.get(),year_entry.get(),isbn_entry.get())
 def delete_command():
 	book_backend.delete(selected_turple[0])
 
@@ -67,24 +80,24 @@ title_entry.grid(row = 0, column =1)
 
 #Year start--------------------------------
 yLabel= 'Year'
-title_txt= Label(window,text = yLabel)
-title_txt.grid(row=1,column=0)
+year_txt= Label(window,text = yLabel)
+year_txt.grid(row=1,column=0)
 
 yEntry= StringVar()
-title_entry= Entry(window, textvariable = yEntry)
-title_entry.grid(row = 1, column =1)
+year_entry= Entry(window, textvariable = yEntry)
+year_entry.grid(row = 1, column =1)
 
 #Year end--------------------------------
 
 
 #Author start--------------------------------
 aLabel= 'Author'
-title_txt= Label(window,text = aLabel)
-title_txt.grid(row=0,column=2)
+author_txt= Label(window,text = aLabel)
+author_txt.grid(row=0,column=2)
 
 aEntry= StringVar()
-title_entry= Entry(window, textvariable = aEntry)
-title_entry.grid(row = 0, column =3)
+author_entry= Entry(window, textvariable = aEntry)
+author_entry.grid(row = 0, column =3)
 
 #Author end--------------------------------
 
@@ -93,12 +106,12 @@ title_entry.grid(row = 0, column =3)
 #ISBN end--------------------------------
 
 isbnLabel= 'ISBN'
-title_txt= Label(window,text = isbnLabel)
-title_txt.grid(row=1,column=2)
+isbn_txt= Label(window,text = isbnLabel)
+isbn_txt.grid(row=1,column=2)
 
 isbnEntry= StringVar()
-title_entry= Entry(window, textvariable = isbnEntry)
-title_entry.grid(row = 1, column =3)
+isbn_entry= Entry(window, textvariable = isbnEntry)
+isbn_entry.grid(row = 1, column =3)
 
 
 #ISBN end--------------------------------
@@ -125,7 +138,7 @@ view_btn.grid(row = 5, column = 3)
 
 
 close_btn_txt = 'Close'
-view_btn = Button(window, text=close_btn_txt , width = 12)
+view_btn = Button(window, text=close_btn_txt , width = 12, command = close_command)
 view_btn.grid(row = 7, column = 3)
 
 
