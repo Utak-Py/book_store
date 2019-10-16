@@ -29,7 +29,7 @@ def delete(id):
 def update(id,title,author,year,isbn_no):
     conn= sqlite3.connect("book_info.db")#creates data base/ links to existing db
     cur= conn.cursor()
-    cur.execute("UPDATE store SET title =?, author=?,year=?,isbn_no = ? WHERE id=?",(id,title,author,year,isbn_no))
+    cur.execute("UPDATE store SET title =?, author=?,year=?,isbn_no = ? WHERE id=?",(title,author,year,isbn_no,id))
     conn.commit()
     conn.close()
 
